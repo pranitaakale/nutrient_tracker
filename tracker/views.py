@@ -26,13 +26,13 @@ def index(request):
         userid = request.POST['userid']
         messages.success(request, {userid})
         request.session['userid'] = userid
-        conn.commit
+        conn.commit()
         return redirect('homepage')
 
     else:
         cursor.execute("SELECT * from UserDetails")
         get_users = cursor.fetchall()
-        conn.commit
+        conn.commit()
         return render(request, 'tracker/index.html', {'get_users': get_users})
 
 
@@ -164,7 +164,7 @@ def homepage(request):
             conn.commit()
             return HttpResponseRedirect(reverse('homepage'))
 
-        return render(request, 'userdetails/homepage.html', context)
+        return render(request, 'tracker/homepage.html', context)
 
     else:
-        return render(request, 'userdetails/homepage.html', context)
+        return render(request, 'tracker/homepage.html', context)
