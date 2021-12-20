@@ -1,0 +1,183 @@
+{% load static %}
+<title>Nutrient Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'tracker/home.css' %}" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+<div class="main-app">
+    <div class="navbar">
+        <h1>Nutrient Tracker</h1>
+    </div>
+    <div class="user">
+        Hello, {{user_details.1}}
+    </div>
+    <div class="card-container-head">
+        <h4>Last 1 week's breakdown</h4>
+    </div>
+    <div class="card-container">
+
+        <div class="card">
+            <h3>Calorie (kcal)</h3>
+            <h2>{{ get_sum_week.0.0 }}</h2>
+        </div>
+        <div class="card">
+            <h3>Protein (g)</h3>
+            <h2>{{ get_sum_week.0.1 }}</h2>
+        </div>
+        <div class="card">
+            <h3>Fats (g)</h3>
+            <h2>{{ get_sum_week.0.2 }}</h2>
+        </div>
+        <div class="card">
+            <h3>Carbo (g)</h3>
+            <h2>{{ get_sum_week.0.3 }}</h2>
+        </div>
+
+    </div>
+    <h4>Your Details</h4>
+    <div class="user-details">
+
+        <label>Age:  <b>{{user_details.2}}</b></label>
+        <label>Gender:  <b>{{user_details.3}}</b></label>
+        <label>Height:  <b>{{user_details.4}}cm</b></label>
+        <label>Weight:  <b>{{user_details.5}}kg</b></label>
+    </div>
+    <div class="consumption">
+        <h4>1 Day's Breakdown</h4>
+        <form class="date-form" method="POST">
+            <input type="date" value="{{date_meal}}" name="date_meal">
+            <button class="add-set" type="submit" name="set-date">Set</button>
+        </form>
+        <div class="graph">
+            <div class="graph-details">
+                <p id="perday1">{{ get_sum_per_day.0.0 }}</p>
+                <p id="perday2">{{ get_sum_per_day.0.1 }}</p>
+                <p id="perday3">{{ get_sum_per_day.0.2 }}</p>
+                <p id="perday4">{{ get_sum_per_day.0.3 }}</p>
+            </div>
+            <div class="graph-canvas">
+                <canvas id="myChart" width="400" height="400"></canvas>
+
+            </div>
+        </div>
+        <div class="meal">
+            <div class="add-meal">
+                <h4>Add Meal</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="userid" value="{{user_details.0}}">
+                    <input type="hidden" value="{{date_meal}}" name="date_here">
+                    <!-- <input type="hidden" name="username" value="{{user_details.1}}"> -->
+                    <input placeholder="e.g. Breakfast" name="enter_meal">
+
+                    <button class="add-set" type="submit" name="add_meal">Add</button>
+                </form>
+            </div>
+            <div class="food-item">
+                <h4>Per Meal Breakdown</h4>
+                {% for meal in meal_details %}
+                <div id="{{meal.0}}">
+                    <div class="food-item-head">
+                        <h4>{{meal.2}}</h4>
+                        <form method="POST">
+                            <input type="hidden" name="del-meal" value="{{meal.0}}">
+                            <button class="del-btn" name="delmeal">Delete</button></form>
+                    </div>
+                    <div class="meal-form">
+                        <form class="container" method="POST">
+                            <div class="select-food">
+                                (100gm) <select name="food_id" id="food_id">
+                                    {% for tag in get_food_tags %}
+                                        <optgroup label="{{tag.0}}">
+                                        {% for food_item in get_food_items %}
+                                            {% if food_item.2 == tag.0 %}
+                                                <option value="{{food_item.0}}" >{{food_item.1}}</option>
+                                            {% endif %}
+                                        {% endfor %}{% endfor %}
+                                        </optgroup>
+                                    </select>
+                            </div>
+                            <div class="set-quantity">
+                                <input type="hidden" value="{{meal.0}}" name="meal_id"> Quantity: <input type="number" value=1 name="quantit">
+                                <button name="add_food" class="add-set">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <p>{{get_food_per_meal}}</p> -->
+                    {% if get_food_per_meal %}
+                    <table>
+                        <th>Food</th>
+                        <th>Calorie (kcal)</th>
+                        <th>Fat (g)</th>
+                        <th>Protein (g)</th>
+                        <th>Carbs (g)</th>
+                        <th></th>
+                        {% for food_per_meal in get_food_per_meal %} {% if food_per_meal.1 == meal.0 %}
+                        <tbody>
+                            <tr>
+                                <td>{{ food_per_meal.8}}</td>
+                                <td>{{ food_per_meal.4}}</td>
+                                <td>{{ food_per_meal.5}}</td>
+                                <td>{{ food_per_meal.6}}</td>
+                                <td>{{ food_per_meal.7}}</td>
+                                <td>
+                                    <form method="POST"><input type="hidden" name="del-food" value="{{food_per_meal.0}}"><button class="del-btn" type="submit" name="delfood">Delete</button></form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endif %} {% endfor %} {% for sum_per_meal in get_sum_per_meal %} {% if sum_per_meal.0 == meal.0 %}
+                        <tfoot>
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td><b>{{ sum_per_meal.1 }}</b></td>
+                                <td><b>{{ sum_per_meal.2 }}</b></td>
+                                <td><b>{{ sum_per_meal.3 }}</b></td>
+                                <td><b>{{ sum_per_meal.4 }}</b></td>
+                            </tr>
+                        </tfoot>
+                        {% endif %}{% endfor %}
+                    </table>
+                    {% endif %}
+                </div>
+                <hr/> {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    var cal = parseFloat(document.getElementById('perday1').innerHTML)
+    var pro = parseFloat(document.getElementById('perday2').innerHTML)
+    var fat = parseFloat(document.getElementById('perday3').innerHTML)
+    var carb = parseFloat(document.getElementById('perday4').innerHTML)
+    var total_nutr = 0;
+    var tot_cal = 0;
+    var tot_pro = 0;
+    var tot_fat = 0;
+    var tot_carb = 0;
+    total_nutr = cal + pro + fat + carb
+    tot_cal = (cal / total_nutr) * 100
+    tot_pro = (pro / total_nutr) * 100
+    tot_fat = (fat / total_nutr) * 100
+    tot_carb = (carb / total_nutr) * 100
+    console.log(tot_cal, tot_pro, tot_fat, tot_carb, total_nutr)
+    const myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Calorie', 'Protein', 'Fats', 'Carbs', ],
+            datasets: [{
+                label: 'Breakdown for 1 Day',
+                data: [tot_cal, tot_pro, tot_fat, tot_carb],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(153, 102, 255, 0.8)'
+                ],
+
+                borderWidth: 1
+            }]
+        },
+    });
+</script>
