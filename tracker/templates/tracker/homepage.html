@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'tracker/home.css' %}" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
-<div class="main-app">
+hello
+<!-- <div class="main-app">
     <div class="navbar">
         <h1>Nutrient Tracker</h1>
     </div>
@@ -66,7 +67,6 @@
                     {% csrf_token %}
                     <input type="hidden" name="userid" value="{{user_details.0}}">
                     <input type="hidden" value="{{date_meal}}" name="date_here">
-                    <!-- <input type="hidden" name="username" value="{{user_details.1}}"> -->
                     <input placeholder="e.g. Breakfast" name="enter_meal">
 
                     <button class="add-set" type="submit" name="add_meal">Add</button>
@@ -102,7 +102,6 @@
                             </div>
                         </form>
                     </div>
-                    <!-- <p>{{get_food_per_meal}}</p> -->
                     {% if get_food_per_meal %}
                     <table>
                         <th>Food</th>
@@ -180,4 +179,4 @@
             }]
         },
     });
-</script>
+</script> -->
