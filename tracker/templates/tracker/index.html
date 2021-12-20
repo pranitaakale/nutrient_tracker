@@ -4,15 +4,16 @@
 <title>Welcome!</title>
 <div class="login-page">
     <div class="info">
-        This web app is for demo purpose only. Select one of the given users to proceed to the main app.
+        <h3>Welcome to Nutrient Tracker !</h3>
+        <br> This web app is for demo purpose only. Kindly select one of the given users to proceed to the main app.
     </div>
     <div class="login-form">
         <form method="POST">
             {% csrf_token %}
             <select name="userid" id="userid">
-        <!-- {% for user in get_users %} -->
-        <!-- <option name="usr" value="{{user.0}}">{{user.1}}</option> -->
-        <!-- {% endfor %} -->
+        {% for user in get_users %} 
+        <option name="usr" value="{{user.0}}">{{user.1}}</option>
+        {% endfor %}
     </select>
 
             <button type="submit">Login</button>
