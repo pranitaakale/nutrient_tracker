@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+:root {
+    --purle: #B983FF;
+    --blue: #94B3FD;
+    --light-blue: #94DAFF;
+    --teal: #99FEFF;
+}
+
+body {
+    margin: auto;
+    padding: auto;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input {
+    border-color: var(--purle);
+}
+
+.main-app {
+    margin: 0 auto;
+    background-color: azure;
+}
+
+
+/* https://stackoverflow.com/questions/26318988/linear-gradient-not-working-in-chrome */
+
+.navbar {
+    background-color: var(--purle);
+    ;
+    border: .2rem solid var(--purle);
+    border-radius: 0 0% 7% 7%;
+}
+
+.navbar h1 {
+    font-size: 1.5rem;
+    margin: 1rem;
+}
+
+.user {
+    margin: 2rem;
+    font-size: 1.2rem;
+}
+
+.card-container-head {
+    margin: 2rem;
+    font-size: 1.2rem;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+    padding: 1.2rem;
+}
+
+.card {
+    margin: .2rem .2rem;
+    flex: 1 1 33%;
+    width: 20%;
+    text-align: center;
+    border: .2rem solid var(--teal);
+    background-color: var(--teal);
+    border-radius: 5%;
+}
+
+h4 {
+    margin-left: 1rem;
+}
+
+.user-details {
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--teal);
+    padding: 1rem;
+    border-radius: 5%;
+}
+
+.user-details label {
+    width: 30%;
+    flex: 1 1 40%;
+}
+
+.user-details b {
+    font-size: 1.2rem;
+}
+
+.consumption {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.consumption input {
+    height: 3rem;
+    width: 70%;
+}
+
+.add-set {
+    background-color: var(--purle);
+    border: none;
+    width: 20%;
+    font-size: 1.3rem;
+    padding: .5rem;
+    margin-left: 1rem;
+    border-radius: 10%;
+}
+
+.graph {
+    height: 40vh;
+    width: 80vw;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    border: .05rem solid var(--teal);
+}
+
+.graph-details {
+    display: none;
+}
+
+.graph-canvas {
+    position: relative;
+    /* height: 10vh;
+    width: 20vw */
+    height: 40vh;
+    width: 75vw;
+}
+
+.meal {
+    /* margin-top: 2rem; */
+    width: 100%;
+    margin: 0 auto;
+}
+
+.add-meal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin-top: 3.5%;
+}
+
+.add-meal input {
+    width: 65%;
+    /* margin-left: 1.5rem; */
+}
+
+.add {
+    width: 25%;
+    padding: .5rem;
+    font-size: 1.5rem;
+}
+
+.food-item {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+}
+
+.food-item-head h4 {
+    margin: 0;
+    width: 90%;
+    padding-left: .5rem;
+    /* ; */
+}
+
+.food-item-head {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0;
+}
+
+.del-btn {
+    margin-right: 2%;
+    background-color: transparent;
+    border: none;
+    color: red;
+}
+
+.meal-form {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    text-align: center;
+}
+
+.meal-form select {
+    width: 60%;
+    font-size: 1.2rem;
+    margin-left: .2rem;
+}
+
+.meal-form input {
+    width: 20%;
+    height: 1.5rem;
+}
+
+.set-quantity {
+    margin-top: .3rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    text-align: left;
+}
+
+
+/* th {
+    display: none;
+}
+
+tr,
+td,
+table {
+    display: block;
+    width: 100%;
+}
+
+tr {
+    margin-bottom: 2%;
+}
+
+td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+} */
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: .5rem;
+}
+
+tbody:before {
+    content: "@";
+    display: block;
+    line-height: 10px;
+    text-indent: -99999px;
+}
+
+th {
+    width: 20%;
+    word-wrap: break-word;
+    background-color: var(--purle);
+    font-size: 1.2rem;
+}
+
+tfoot {
+    font-size: 1.2rem;
+    color: var(--purle);
+}
+
+hr {
+    background-color: var(--purple);
+    border: .02rem solid var(--purle);
+}
+
+@media (min-width: 720px) {
+    .main-app {
+        width: 75%;
+    }
+    .card-container {
+        flex-wrap: nowrap;
+    }
+    .user-details {
+        padding: 1rem;
+        flex-wrap: nowrap;
+        border-radius: 0;
+    }
+    .container {
+        flex-direction: row;
+    }
+    .meal {
+        margin-top: 5rem;
+        width: 55vw;
+    }
+    .meal-form select {
+        width: 70%;
+    }
+    .add-meal input {
+        width: 50%;
+    }
+    .add {
+        width: 30%;
+    }
+    .date-form button {
+        font-size: 1.5rem;
+        width: 15%;
+    }
+    .graph {
+        margin: 2rem auto;
+        height: 60vh;
+        width: 35vw;
+    }
+    .graph-canvas {
+        height: 20vh;
+        width: 30vw
+    }
+}

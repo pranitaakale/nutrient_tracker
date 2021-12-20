@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'tracker/style.css' %}" />
+<title>Welcome!</title>
+<div class="login-page">
+    <div class="info">
+        This web app is for demo purpose only. Select one of the given users to proceed to the main app.
+    </div>
+    <div class="login-form">
+        <form method="POST">
+            {% csrf_token %}
+            <select name="userid" id="userid">
+        <!-- {% for user in get_users %} -->
+        <!-- <option name="usr" value="{{user.0}}">{{user.1}}</option> -->
+        <!-- {% endfor %} -->
+    </select>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome!</title>
-</head>
-
-<body>
-    Nutrient Tracker
-</body>
-
-</html>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
