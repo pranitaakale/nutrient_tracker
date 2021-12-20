@@ -6,4 +6,4 @@ setuptools==59.2.0
 sqlparse==0.4.2
 tzdata==2021.5
 wheel==0.37.0
-environ==1.0
+django-environ==0.8.1
